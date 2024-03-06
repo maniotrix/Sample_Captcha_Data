@@ -1,4 +1,4 @@
-### Create virtual environment using conda
+# Create virtual environment using conda and install GLF
 ### -------------------------------------
 
 ### To create a virtual environment using conda, follow these steps:
@@ -19,11 +19,11 @@
 
 ### Once you have created and activated the virtual environment, you can install the project dependencies using the requirements.txt file. Here's how:
 
-### 1. Make sure you are in the project directory and your virtual environment is active.
-### 2. Run the following command to install the dependencies:
+## 1. Make sure you are in the project directory and your virtual environment is active.
+## 2. Run the following command to install the dependencies:
 ####    `pip install -r requirements.txt`
 ###    This command will install all the packages listed in the requirements.txt file.
-### 3. Wait for the installation to complete. Once it's done, you're ready to work on the project.
+## 3. Wait for the installation to complete. Once it's done, you're ready to work on the project.
 
 ### Remember to activate the virtual environment every time you work on the project to ensure that you are using the correct dependencies.
 
@@ -33,3 +33,5 @@
 ####       `pip freeze > requirements.txt`
 ###       This will generate a requirements.txt file with all the currently installed packages in your virtual environment.
 ### Requirements to run all python and jupyter notebook files
+
+## 4. Install Git Large File Storage using [GLF Link](https://docs.github.com/en/repositories/working-with-files/managing-large-files/installing-git-large-file-storage).
