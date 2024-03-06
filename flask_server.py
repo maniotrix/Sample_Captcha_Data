@@ -16,6 +16,8 @@ from colorama import Fore, Style
 
 from flask import Flask, request, jsonify
 
+import sys
+
 characters = ['2', '3', '4', '5', '6', '7', '8', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'k', 'm', 'n', 'p', 'r', 'w', 'x', 'y']
 # Desired image dimensions
 img_width = 200
@@ -111,17 +113,26 @@ class CTCLayer(layers.Layer):
         # At test time, just return the computed predictions
         return y_pred
 
+# use os to get the current working directory
+current_directory = os.getcwd()
+# get trained model directory using current working directory
+if getattr(sys, 'frozen', False):
+    trained_model_directory = os.path.join(sys._MEIPASS, 'trained_models')
+else:
+    trained_model_directory = os.path.join(current_directory, "trained_models")
+keras_file_path = os.path.join(trained_model_directory, "my_model.keras")
+h5_file_path = os.path.join(trained_model_directory, "my_model.h5")
 model = None
 try:
     model = keras.models.load_model(
-        "./trained_models/my_model.keras",
+        keras_file_path,
         custom_objects={"CTCLayer": CTCLayer},
     )
     print("Model loaded using keras file")
 except Exception as e:
     print(Fore.RED + "Error loading keras file: ", e, Style.RESET_ALL)
     model = keras.models.load_model(
-        "./trained_models/my_model.h5",
+        h5_file_path,
         custom_objects={"CTCLayer": CTCLayer},
     )
     print("Model loaded using h5 file")
