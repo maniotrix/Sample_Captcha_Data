@@ -24,7 +24,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='flask_server',
+    name='ocr_server',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
