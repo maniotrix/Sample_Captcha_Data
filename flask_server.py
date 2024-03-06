@@ -2,6 +2,11 @@
 # Description: This file contains the code to create a Flask server 
 # that can be used to make predictions on image captchas using the trained model.
 
+from colorama import Fore, Style
+
+# display that the server is initializing and will start soon
+print(Fore.YELLOW + "Initializing OCR Server...", Style.RESET_ALL)
+
 import os
 
 os.environ["KERAS_BACKEND"] = "tensorflow"
@@ -12,11 +17,13 @@ import tensorflow as tf
 import keras
 from keras import layers
 
-from colorama import Fore, Style
-
 from flask import Flask, request, jsonify
 
 import sys
+
+from waitress import serve
+
+import socket
 
 characters = ['2', '3', '4', '5', '6', '7', '8', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'k', 'm', 'n', 'p', 'r', 'w', 'x', 'y']
 # Desired image dimensions
@@ -169,7 +176,7 @@ def ctc_decode(y_pred, input_length, greedy=True, beam_width=100, top_paths=1):
 prediction_model = keras.models.Model(
     model.input[0], model.get_layer(name="dense2").output
 )
-prediction_model.summary()
+# prediction_model.summary()
 
 
 # A utility function to decode the output of the network
@@ -231,4 +238,14 @@ def predict():
     os.remove(input_image_path)
     return jsonify(response)
 
-app.run()
+server_ip = "0.0.0.0"
+server_port = 5000
+# get the ip address of the server
+def print_server_info():
+    hostname = socket.gethostname()
+    ip_address = socket.gethostbyname(hostname)
+    # use colors to print
+    print("OCR Server running at: " + Fore.GREEN + ip_address + f":{server_port}", Style.RESET_ALL)
+
+print_server_info()
+serve(app, host=server_ip, port=server_port)
