@@ -299,6 +299,3 @@ print("Total test images: ", total_test_images)
 print("Total incorrect predictions: ", total_test_images - correct_predictions)
 # print the accuracy upto 2 decimal places
 print("Accuracy: ", round(correct_predictions / total_test_images * 100, 2), "%")
-
-
-
