@@ -176,7 +176,7 @@ def ctc_decode(y_pred, input_length, greedy=True, beam_width=100, top_paths=1):
 prediction_model = keras.models.Model(
     model.input[0], model.get_layer(name="dense2").output
 )
-# prediction_model.summary()
+prediction_model.summary()
 
 
 # A utility function to decode the output of the network
