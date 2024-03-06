@@ -1,4 +1,4 @@
-# Name: Prince aka maniotrix
+# Name: Prince
 # Description: This file contains the code to create a Flask server 
 # that can be used to make predictions on image captchas using the trained model.
 
